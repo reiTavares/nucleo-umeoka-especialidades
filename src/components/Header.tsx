@@ -26,7 +26,7 @@ const Header: React.FC = () => {
             <svg 
               className="w-12 h-12 mr-3"
               preserveAspectRatio="xMidYMid meet" 
-              viewBox="0 0 531.89 335.99"
+              viewBox="0  0 531.89 335.99"
               xmlns="http://www.w3.org/2000/svg" 
               aria-label="Logo Núcleo Umeoka Especialidades"
             >
@@ -60,13 +60,13 @@ const Header: React.FC = () => {
             </nav>
             
             <a 
-              href="tel:+556137720825" 
+              href="tel:+556139991616" 
               className={`flex items-center font-medium ${
                 isScrolled ? 'text-pink-600' : 'text-white'
               }`}
             >
               <Phone size={18} className="mr-2" />
-              (61) 3772-0825
+              (61) 3999-1616
             </a>
           </div>
           
@@ -102,11 +102,11 @@ const Header: React.FC = () => {
               ))}
               <li>
                 <a 
-                  href="tel:+556137720825" 
+                  href="tel:+556139991616" 
                   className="flex items-center py-2 text-pink-600 font-medium"
                 >
                   <Phone size={18} className="mr-2" />
-                  (61) 3772-0825
+                  (61) 3999-1616
                 </a>
               </li>
             </ul>

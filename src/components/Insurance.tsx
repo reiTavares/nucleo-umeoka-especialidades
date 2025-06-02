@@ -2,12 +2,25 @@ import React from 'react';
 
 const Insurance: React.FC = () => {
   const insurancePartners = [
-    { name: "ASTE", logo: "https://via.placeholder.com/150x80?text=ASTE" },
-    { name: "AFFEGO", logo: "https://via.placeholder.com/150x80?text=AFFEGO" },
-    { name: "FASCAL", logo: "https://via.placeholder.com/150x80?text=FASCAL" },
-    { name: "PROASA", logo: "https://via.placeholder.com/150x80?text=PROASA" },
-    { name: "TST Saúde", logo: "https://via.placeholder.com/150x80?text=TST+Saúde" }
-  ];
+    "AFEB BRASAL", "AFFEGO", "ANAF SAÚDE", "ASETE (ASTE)", "BACEN", "CAESAN", 
+    "CARE PLUS", "CASEC (CODEVASF)", "CASEMBRAPA", "CNTI", "CONAB", "EMBRATEL", 
+    "FAPES (BNDES)", "FASCAL", "GDF SAÚDE", "LIFE EMPRESARIAL", "LUMINAR SAÚDE (EVIDA)", 
+    "OMINT SAÚDE", "PF SAÚDE (POLÍCIA FEDERAL)", "PLAN ASSISTE (MPU)", "PLAS/JMU (STM)", 
+    "PMDF", "POSTAL SAÚDE (ECT)", "PROASA", "PRÓ-SAÚDE (CÂMARA DOS DEPUTADOS)", 
+    "PRÓ-SAÚDE (TJDFT)", "PRÓ-SER (STJ)", "PRÓ-SOCIAL (TRF)", 
+    "REAL GRANDEZA (DEMAIS PLANOS)", "REAL GRANDEZA (SALVUS E SALUTEM)", "SAÚDE CAIXA", 
+    "SERPRO", "SIS SENADO", "STF-MED (STF)", "TRE SAÚDE", "TRT SAÚDE", "TST SAÚDE", "UNAFISCO"
+  ].sort();
+
+  // Group insurances by first letter
+  const groupedInsurances = insurancePartners.reduce((acc, insurance) => {
+    const firstLetter = insurance[0];
+    if (!acc[firstLetter]) {
+      acc[firstLetter] = [];
+    }
+    acc[firstLetter].push(insurance);
+    return acc;
+  }, {} as Record<string, string[]>);
 
   return (
     <section id="convênios" className="py-16 bg-white">
@@ -15,24 +28,19 @@ const Insurance: React.FC = () => {
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-gray-800 mb-4">Convênios Atendidos</h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Trabalhamos com os principais planos de saúde para facilitar seu atendimento
+            Trabalhamos com os principais planos de saúde do DF na modalidade reembolso.
           </p>
-          <div className="inline-block mt-3 px-4 py-2 bg-pink-100 text-pink-800 rounded-full text-sm font-medium">
-            Somente para exames
-          </div>
         </div>
         
-        <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
-          {insurancePartners.map((partner, index) => (
-            <div 
-              key={index} 
-              className="bg-gray-50 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300"
-            >
-              <img 
-                src={partner.logo} 
-                alt={`Logo ${partner.name}`} 
-                className="h-16 object-contain"
-              />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {Object.entries(groupedInsurances).map(([letter, insurances]) => (
+            <div key={letter} className="bg-pink-50 p-6 rounded-lg">
+              <h3 className="text-2xl font-bold text-pink-600 mb-4">{letter}</h3>
+              <ul className="space-y-2">
+                {insurances.map((insurance, index) => (
+                  <li key={index} className="text-gray-700">{insurance}</li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>

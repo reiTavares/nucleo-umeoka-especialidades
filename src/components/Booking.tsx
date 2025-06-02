@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import { MessageCircle } from 'lucide-react';
 
 interface FormData {
   name: string;
   phone: string;
   childAge: string;
   examType: string;
-  message: string;
+  insurance: string;
 }
 
 const Booking: React.FC = () => {
@@ -14,7 +15,7 @@ const Booking: React.FC = () => {
     phone: '',
     childAge: '',
     examType: '',
-    message: ''
+    insurance: ''
   });
   
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -31,8 +32,21 @@ const Booking: React.FC = () => {
     "Audiometria de Estado Estável",
     "Outro"
   ];
+
+  const insuranceOptions = [
+    "AFEB BRASAL", "AFFEGO", "ANAF SAÚDE", "ASETE (ASTE)", "BACEN", "CAESAN", 
+    "CARE PLUS", "CASEC (CODEVASF)", "CASEMBRAPA", "CNTI", "CONAB", "EMBRATEL", 
+    "FAPES (BNDES)", "FASCAL", "GDF SAÚDE", "LIFE EMPRESARIAL", "LUMINAR SAÚDE (EVIDA)", 
+    "OMINT SAÚDE", "PF SAÚDE (POLÍCIA FEDERAL)", "PLAN ASSISTE (MPU)", "PLAS/JMU (STM)", 
+    "PMDF", "POSTAL SAÚDE (ECT)", "PROASA", "PRÓ-SAÚDE (CÂMARA DOS DEPUTADOS)", 
+    "PRÓ-SAÚDE (TJDFT)", "PRÓ-SER (STJ)", "PRÓ-SOCIAL (TRF)", 
+    "REAL GRANDEZA (DEMAIS PLANOS)", "REAL GRANDEZA (SALVUS E SALUTEM)", "SAÚDE CAIXA", 
+    "SERPRO", "SIS SENADO", "STF-MED (STF)", "TRE SAÚDE", "TRT SAÚDE", "TST SAÚDE", "UNAFISCO",
+    "Outro",
+    "Sem convênio"
+  ].sort();
   
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prevData => ({
       ...prevData,
@@ -40,37 +54,70 @@ const Booking: React.FC = () => {
     }));
   };
   
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate API call
-    setTimeout(() => {
-      console.log(formData);
+    try {
+      // Get UTM parameters
+      const urlParams = new URLSearchParams(window.location.search);
+      const utmSource = urlParams.get('utm_source') || 'Site';
+      const utmMedium = urlParams.get('utm_medium');
+      const utmCampaign = urlParams.get('utm_campaign');
+      const utmContent = urlParams.get('utm_content');
+      const utmTerm = urlParams.get('utm_term');
+
+      // Prepare data for webhook
+      const webhookData = {
+        ...formData,
+        pageUrl: window.location.href,
+        pageOrigin: window.location.origin,
+        userAgent: navigator.userAgent,
+        utmParams: {
+          source: utmSource,
+          medium: utmMedium,
+          campaign: utmCampaign,
+          content: utmContent,
+          term: utmTerm
+        }
+      };
+
+      // Send data to webhook
+      await fetch('https://hook.profusaodigital.com/webhook/nocleo-umeoka', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(webhookData),
+      });
+
+      // Prepare WhatsApp message
+      const whatsappMessage = `Olá, me chamo ${formData.name}, meu filho(a) tem ${formData.childAge}.
+
+Gostaria de agendar um exame de ${formData.examType}, meu convênio é ${formData.insurance}.
+
+Eu vim do ${utmSource} (${window.location.origin}).
+
+Pode me fornecer mais informações?`;
+
+      // Redirect to WhatsApp
+      window.location.href = `https://wa.me/556139991616?text=${encodeURIComponent(whatsappMessage)}`;
+
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    } finally {
       setIsSubmitting(false);
       setIsSubmitted(true);
-      
-      // Reset form after 5 seconds
-      setTimeout(() => {
-        setIsSubmitted(false);
-        setFormData({
-          name: '',
-          phone: '',
-          childAge: '',
-          examType: '',
-          message: ''
-        });
-      }, 5000);
-    }, 1500);
+    }
   };
 
   return (
-    <section id="agendar" className="py-16 bg-blue-50">
+    <section id="agendar" className="py-16 bg-pink-50">
       <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
           <div className="flex flex-col md:flex-row">
-            <div className="md:w-1/2 bg-blue-600 p-8 text-white flex flex-col justify-center">
-              <h2 className="text-3xl font-bold mb-6">Agende seu Exame</h2>
+            <div className="md:w-1/2 bg-pink-600 p-8 text-white flex flex-col justify-center">
+              <h2 className="text-3xl font-bold mb-6">Agende seu Exame rapidamente no WhatsApp</h2>
               
               <p className="mb-6">
                 Estamos prontos para atender você e seu filho com todo o cuidado e atenção que merecem.
@@ -86,7 +133,7 @@ const Booking: React.FC = () => {
                   </div>
                   <div className="ml-3">
                     <p className="font-semibold">Telefone</p>
-                    <p>(61) 3772-0825</p>
+                    <p>(61) 3999-1616</p>
                   </div>
                 </div>
                 
@@ -126,14 +173,14 @@ const Booking: React.FC = () => {
               {isSubmitted ? (
                 <div className="h-full flex flex-col items-center justify-center text-center">
                   <div className="text-green-500 mb-4">
-                    <svg xmlns="http://www.w3.org/2000/svg\" width="64\" height="64\" viewBox="0 0 24 24\" fill="none\" stroke="currentColor\" strokeWidth="2\" strokeLinecap="round\" strokeLinejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
                       <polyline points="22 4 12 14.01 9 11.01"></polyline>
                     </svg>
                   </div>
                   <h3 className="text-2xl font-bold text-gray-800 mb-2">Agendamento Enviado!</h3>
                   <p className="text-gray-600">
-                    Obrigado pelo interesse. Entraremos em contato em breve para confirmar seu agendamento.
+                    Redirecionando para o WhatsApp...
                   </p>
                 </div>
               ) : (
@@ -149,7 +196,7 @@ const Booking: React.FC = () => {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-pink-500 focus:border-pink-500"
                       placeholder="Digite seu nome completo"
                     />
                   </div>
@@ -165,7 +212,7 @@ const Booking: React.FC = () => {
                       value={formData.phone}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-pink-500 focus:border-pink-500"
                       placeholder="(00) 00000-0000"
                     />
                   </div>
@@ -181,7 +228,7 @@ const Booking: React.FC = () => {
                       value={formData.childAge}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-pink-500 focus:border-pink-500"
                       placeholder="Ex: 3 anos e 2 meses"
                     />
                   </div>
@@ -196,7 +243,7 @@ const Booking: React.FC = () => {
                       value={formData.examType}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-pink-500 focus:border-pink-500"
                     >
                       <option value="">Selecione um exame</option>
                       {examTypes.map((type, index) => (
@@ -204,31 +251,36 @@ const Booking: React.FC = () => {
                       ))}
                     </select>
                   </div>
-                  
+
                   <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-                      Mensagem (opcional)
+                    <label htmlFor="insurance" className="block text-sm font-medium text-gray-700 mb-1">
+                      Convênio
                     </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      value={formData.message}
+                    <select
+                      id="insurance"
+                      name="insurance"
+                      value={formData.insurance}
                       onChange={handleChange}
-                      rows={3}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                      placeholder="Informações adicionais importantes"
-                    ></textarea>
+                      required
+                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-pink-500 focus:border-pink-500"
+                    >
+                      <option value="">Selecione um convênio</option>
+                      {insuranceOptions.map((insurance, index) => (
+                        <option key={index} value={insurance}>{insurance}</option>
+                      ))}
+                    </select>
                   </div>
                   
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className={`w-full py-3 px-4 ${
+                    className={`w-full py-3 px-4 flex items-center justify-center gap-2 ${
                       isSubmitting 
-                        ? 'bg-blue-400' 
-                        : 'bg-blue-600 hover:bg-blue-700'
-                    } text-white font-medium rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2`}
+                        ? 'bg-green-400' 
+                        : 'bg-green-500 hover:bg-green-600'
+                    } text-white font-medium rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2`}
                   >
+                    <MessageCircle size={20} />
                     {isSubmitting ? 'Enviando...' : 'Agendar Consulta'}
                   </button>
                 </form>

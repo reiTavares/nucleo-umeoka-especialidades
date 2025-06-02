@@ -26,67 +26,79 @@ const Facility: React.FC = () => {
   
   const galleryImages = [
     {
-      src: "https://images.pexels.com/photos/3933025/pexels-photo-3933025.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+      src: "/Prancheta 1site.webp",
       alt: "Recepção acolhedora da clínica"
     },
     {
-      src: "https://images.pexels.com/photos/3662847/pexels-photo-3662847.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+      src: "/Prancheta 2site.webp",
       alt: "Espaço kids para entretenimento das crianças"
     },
     {
-      src: "https://images.pexels.com/photos/4226119/pexels-photo-4226119.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+      src: "/Prancheta 3site.webp",
       alt: "Consultório especializado para exames auditivos"
     },
     {
-      src: "https://images.pexels.com/photos/3846035/pexels-photo-3846035.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+      src: "/Prancheta 4site.webp",
       alt: "Sala de audiometria infantil"
+    },
+    {
+      src: "/Prancheta 5site.webp",
+      alt: "Ambiente lúdico e acolhedor"
+    },
+    {
+      src: "/Prancheta 6site.webp",
+      alt: "Espaço de atendimento"
+    },
+    {
+      src: "/Prancheta 7site.webp",
+      alt: "Área de espera"
+    },
+    {
+      src: "/Prancheta 9site.webp",
+      alt: "Sala de exames"
+    },
+    {
+      src: "/Prancheta 10site.webp",
+      alt: "Equipamentos modernos"
+    },
+    {
+      src: "/Prancheta 11site.webp",
+      alt: "Área de lazer infantil"
+    },
+    {
+      src: "/Prancheta 12site.webp",
+      alt: "Consultório principal"
+    },
+    {
+      src: "/Prancheta 13site.webp",
+      alt: "Recepção moderna"
     }
   ];
 
   return (
-    <section id="estrutura" className="py-16 bg-green-50">
+    <section id="estrutura" className="py-16 bg-pink-50">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="flex flex-col lg:flex-row items-center gap-12">
-          <div className="lg:w-1/2">
-            <h2 className="text-3xl font-bold text-gray-800 mb-6">
-              Estrutura Física e Ambiente Humanizado
-            </h2>
-            
-            <p className="text-gray-600 mb-6">
-              Nossa clínica foi cuidadosamente projetada para proporcionar o máximo conforto e segurança 
-              para as crianças e seus acompanhantes. Contamos com salas acusticamente tratadas, equipamentos 
-              de última geração e um ambiente lúdico que ajuda a reduzir a ansiedade dos pequenos pacientes.
-            </p>
-            
-            <p className="text-gray-600 mb-8">
-              Desde a recepção até as salas de exame, cada detalhe foi pensado para tornar a experiência 
-              o mais acolhedora possível, transformando o momento do diagnóstico em uma experiência positiva.
-            </p>
-            
-            <div className="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-lg">
-              <iframe 
-                width="560" 
-                height="315" 
-                src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
-                title="Vídeo institucional da clínica" 
-                frameBorder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowFullScreen
-                className="w-full h-full"
-              ></iframe>
-            </div>
-          </div>
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold text-gray-800 mb-6">
+            Estrutura Física e Ambiente Humanizado
+          </h2>
           
-          <div className="lg:w-1/2 grid grid-cols-1 md:grid-cols-2 gap-4">
-            {galleryImages.map((image, index) => (
-              <GalleryImage 
-                key={index}
-                src={image.src}
-                alt={image.alt}
-                onClick={() => setSelectedImage(image.src)}
-              />
-            ))}
-          </div>
+          <p className="text-gray-600 mb-8">
+            Nossa clínica foi cuidadosamente projetada para proporcionar o máximo conforto e segurança 
+            para as crianças e seus acompanhantes. Contamos com salas acusticamente tratadas, equipamentos 
+            de última geração e um ambiente lúdico que ajuda a reduzir a ansiedade dos pequenos pacientes.
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {galleryImages.map((image, index) => (
+            <GalleryImage 
+              key={index}
+              src={image.src}
+              alt={image.alt}
+              onClick={() => setSelectedImage(image.src)}
+            />
+          ))}
         </div>
       </div>
       
