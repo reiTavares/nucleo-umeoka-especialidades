@@ -1,0 +1,4 @@
+User-agent: *
+    Allow: /
+
+    Sitemap: https://nucleoumeoka.com.br/sitemap.xml
