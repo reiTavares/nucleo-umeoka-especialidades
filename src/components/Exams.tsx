@@ -29,42 +29,43 @@ const Exams: React.FC = () => {
     {
       title: "Audiometria Infantil",
       description: "Avaliação da capacidade auditiva em crianças utilizando técnicas lúdicas adaptadas à idade",
-      imageSrc: "https://images.pexels.com/photos/3938022/pexels-photo-3938022.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-    },
-    {
-      title: "Treinamento Auditivo",
-      description: "Terapia em cabine acústica para desenvolvimento de habilidades auditivas em crianças",
-      imageSrc: "https://images.pexels.com/photos/8942991/pexels-photo-8942991.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-    },
-    {
-      title: "Teste da Orelhinha",
-      description: "Exame para detecção precoce de problemas auditivos em recém-nascidos",
-      imageSrc: "https://images.pexels.com/photos/4473654/pexels-photo-4473654.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-    },
-    {
-      title: "BERA/PEATE Noturno",
-      description: "Avaliação dos potenciais evocados auditivos para detecção de alterações nas vias auditivas",
-      imageSrc: "https://images.pexels.com/photos/4225880/pexels-photo-4225880.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-    },
-    {
-      title: "Processamento Auditivo Central",
-      description: "Avaliação das habilidades auditivas centrais para identificar problemas de processamento",
-      imageSrc: "https://images.pexels.com/photos/5853492/pexels-photo-5853492.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-    },
-    {
-      title: "Terapia de Processamento",
-      description: "Intervenção terapêutica para melhorar as habilidades de processamento auditivo",
-      imageSrc: "https://images.pexels.com/photos/8436564/pexels-photo-8436564.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+      imageSrc: "https://static.wixstatic.com/media/f9803e_18576185b14c4e0b94b2b2489f35b230~mv2.jpg/v1/crop/x_736,y_0,w_1080,h_1080/fill/w_315,h_315,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/audiometria-infantil-.jpg"
     },
     {
       title: "P300",
       description: "Avaliação dos potenciais cognitivos relacionados a eventos auditivos",
-      imageSrc: "https://images.pexels.com/photos/5487367/pexels-photo-5487367.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+      imageSrc: "https://static.wixstatic.com/media/7c7e48_49229a92f7414be18e0fb50810d5ed7a~mv2.jpg/v1/crop/x_100,y_0,w_400,h_400/fill/w_315,h_315,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/audiometria-bogota.jpg"
+    },
+    {
+      title: "Processamento Auditivo Central",
+      description: "Avaliação das habilidades auditivas centrais para identificar problemas de processamento",
+      imageSrc: "https://static.wixstatic.com/media/7c7e48_fc54f89eb2464d5ba5b3a5b86fbdc30f~mv2.jpg/v1/crop/x_219,y_0,w_400,h_400/fill/w_315,h_315,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/binaural-Transtorno-do-Processamento-Auditivo--1024x576.jpg"
+    },
+    {
+      title: "Teste da Orelhinha",
+      description: "Exame para detecção precoce de problemas auditivos em recém-nascidos",
+      imageSrc: "https://static.wixstatic.com/media/7c7e48_396ec05d746d480fabd9365f282c32a2~mv2.jpg/v1/crop/x_45,y_0,w_400,h_400/fill/w_315,h_315,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/teste-da-orelhinha.jpg"
+    },
+    {
+      title: "Terapia de Processamento Auditivo",
+      description: "Intervenção terapêutica para melhorar as habilidades de processamento auditivo",
+      imageSrc: "https://static.wixstatic.com/media/7c7e48_9322d2f8e40646618add50614f13570d~mv2.jpg/v1/crop/x_364,y_0,w_400,h_400/fill/w_315,h_315,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/teste-de-audicao-em-criancas.jpg"
     },
     {
       title: "Audiometria de Estado Estável",
       description: "Exame objetivo para avaliação dos limiares auditivos em diferentes frequências",
-      imageSrc: "https://images.pexels.com/photos/3845609/pexels-photo-3845609.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+      imageSrc: "https://static.wixstatic.com/media/7c7e48_61e08e35a4d149708eacecdc242aa16b~mv2.jpg/v1/crop/x_101,y_0,w_400,h_400/fill/w_315,h_315,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/bera-infantil-1.jpg"
+    },
+    {
+      title: "Treinamento Auditivo",
+      description: "Terapia em cabine acústica para desenvolvimento de habilidades auditivas em crianças",
+      imageSrc: "https://static.wixstatic.com/media/7c7e48_49229a92f7414be18e0fb50810d5ed7a~mv2.jpg/v1/crop/x_100,y_0,w_400,h_400/fill/w_315,h_315,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/audiometria-bogota.jpg"
+    },
+
+    {
+      title: "BERA/PEATE Normal e Noturno",
+      description: "Avaliação dos potenciais evocados auditivos para detecção de alterações nas vias auditivas",
+      imageSrc: "https://static.wixstatic.com/media/7c7e48_e2ee3234e4ed4d4aa3e085ca2c5c2fe2~mv2.jpg/v1/crop/x_100,y_0,w_400,h_400/fill/w_315,h_315,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/eclipse_screening_.jpg"
     }
   ];
 
@@ -87,6 +88,11 @@ const Exams: React.FC = () => {
               imageSrc={exam.imageSrc}
             />
           ))}
+        </div>
+        <div className="text-center mt-12">
+          <a href="#agendamento" className="bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300 ease-in-out">
+            Agendar Agora
+          </a>
         </div>
       </div>
     </section>
